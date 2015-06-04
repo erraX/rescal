@@ -1,28 +1,22 @@
+#!/usr/bin/env python  
+#encoding: utf-8  
+import unittest  
 from dataset import dataset
 
-if __name__ == "__main__":
-    ds = dataset("data/test.txt", "UTF-8")
-    ds.load_triples()
-    T = ds.build_csr_matrix()
+class mytest(unittest.TestCase):  
+    ##初始化工作  
+    def setUp(self):  
+        self.data = dataset('testcase.txt', 'UTF-8')
 
-    print ds
+    #退出清理工作  
+    def tearDown(self):  
+        pass  
 
-    print "*" * 50
-    print "All entities:"
-    print ds.get_all_entity() 
-    print "-" * 50
-    print "All relations:"
-    print ds.get_all_relation()
-    print "-" * 50
-    print "Number of entities"
-    print ds.get_num_entity()
-    print "-" * 50
-    print "Number of relations"
-    print ds.get_num_relation()
-    print "*" * 50
+    def testloadTriples(self):  
+        self.data.load_triples(sep="\t")
+        self.assertEqual(self.data.get_num_entity(), 36)
+        self.assertEqual(self.data.get_num_relation(), 10)
+        self.assertEqual(self.data.get_num_triple(), 30)
 
-    print "Tensor matrix:"
-    for t in T:
-        print t.todense()
-    print "-" * 50
-    print "*" * 50
+if __name__ =='__main__':  
+    unittest.main()  

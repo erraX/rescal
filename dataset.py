@@ -20,7 +20,6 @@ class dataset(object):
     def __repr__(self):
         return "< Entities:%d, Relations:%d, Data Lines:%d >" % (self._num_entity, self._num_relation, self._num_triple)
 
-
     def get_all_entity(self):
         return self._all_entity
 
